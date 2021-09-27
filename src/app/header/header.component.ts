@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
+import { LoginService } from "../login/login.service";
 import { HeaderService } from "./header.service";
 
 @Component({
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
   notifications: any;
   messagesData: any;
 
-  constructor(private headerService: HeaderService, private router: Router) {}
+  constructor( private loginService: LoginService, private headerService: HeaderService, private router: Router) {}
 
   ngOnInit() {
     // this.getDatas("notification");
@@ -107,4 +108,11 @@ export class HeaderComponent implements OnInit {
   onSubmit() {
     this.router.navigate(["/pages/search"]);
   }
+
+  /////////////////////////////////////////////////
+  logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['/login']);
+  }
+
 }
