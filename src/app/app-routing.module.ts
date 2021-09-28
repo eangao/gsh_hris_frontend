@@ -8,9 +8,9 @@ const routes: Routes = [
   { path: 'error', loadChildren: () => import(`./errorpages/errorpages.module`).then(m => m.ErrorpagesModule) },
   {
     path: '',
-    // data: {
-    //   authorities: [Authority.ADMIN],
-    // },
+    data: {
+      authorities: [Authority.ADMIN, Authority.USER],
+    },
     canActivate: [UserRouteAccessService],
     loadChildren: () => import(`./all-modules/all-modules.module`).then(m => m.AllModulesModule)
   }

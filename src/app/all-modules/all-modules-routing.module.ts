@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Authority } from '../config/authority.constants';
 import { AllModulesComponent } from './all-modules.component';
 
 const routes: Routes = [

@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Authority } from 'src/app/config/authority.constants';
 import { AccountService } from 'src/app/core/auth/account.service';
+import { isFunction } from 'util';
 import { LoginService } from '../login.service';
 
 
@@ -34,7 +36,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     // if already authenticated then navigate to home page
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
-        this.router.navigate(['/dashboard/admin']);
+
+        if(this.accountService.hasAnyAuthority(Authority.ADMIN)){
+          this.router.navigate(['/dashboard/admin']);
+        }else{
+          this.router.navigate(['/dashboard/employee']);
+        }
       }
     });
   }
@@ -55,7 +62,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.authenticationError = false;
           if (!this.router.getCurrentNavigation()) {
             // There were no routing during login (eg from navigationToStoredUrl)
-            this.router.navigate(['/dashboard/admin']);
+
+            if(this.accountService.hasAnyAuthority(Authority.ADMIN)){
+              this.router.navigate(['/dashboard/admin']);
+            }else{
+              this.router.navigate(['/dashboard/employee']);
+            }
+
+
           }
         },
         () => (this.authenticationError = true)

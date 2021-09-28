@@ -1,5 +1,7 @@
 import { Component, OnInit, HostListener, NgZone } from "@angular/core";
 import { Router, Event, NavigationEnd } from "@angular/router";
+import { Authority } from "src/app/config/authority.constants";
+import { AccountService } from "src/app/core/auth/account.service";
 
 @Component({
   selector: "app-dashboard",
@@ -14,7 +16,7 @@ export class DashboardComponent implements OnInit {
     this.innerHeight = window.innerHeight + "px";
   }
 
-  constructor(private ngZone: NgZone, private router: Router) {
+  constructor( private accountService: AccountService, private ngZone: NgZone, private router: Router) {
     window.onresize = (e) => {
       this.ngZone.run(() => {
         this.innerHeight = window.innerHeight + "px";
@@ -24,7 +26,17 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigateByUrl("/dashboard/admin");
+     // if already authenticated then navigate to home page
+     this.accountService.identity().subscribe(() => {
+      if (this.accountService.isAuthenticated()) {
+
+        if(this.accountService.hasAnyAuthority(Authority.ADMIN)){
+          this.router.navigate(['/dashboard/admin']);
+        }else{
+          this.router.navigate(['/dashboard/employee']);
+        }
+      }
+    });
   }
 
   onResize(event) {
