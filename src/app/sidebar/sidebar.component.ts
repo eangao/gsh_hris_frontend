@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, Event, NavigationEnd } from "@angular/router";
 import { AllModulesService } from "../all-modules/all-modules.service";
+import { Authority } from "../config/authority.constants";
+import { AccountService } from "../core/auth/account.service";
 
 @Component({
   selector: "app-sidebar",
@@ -24,6 +26,7 @@ export class SidebarComponent implements OnInit {
   groups = {};
 
   constructor(
+    private accountService: AccountService,
     private router: Router,
     private allModulesService: AllModulesService
   ) {
@@ -75,5 +78,9 @@ export class SidebarComponent implements OnInit {
 
   setActive(member) {
     this.allModulesService.members.active = member;
+  }
+
+  public get isAdmin(): boolean {
+    return this.accountService.hasAnyAuthority(Authority.ADMIN);
   }
 }

@@ -14,6 +14,8 @@ import { DepartmentsComponent } from './departments/departments.component';
 import { DesignationComponent } from './designation/designation.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { OvertimeComponent } from './overtime/overtime.component';
+import { UserRouteAccessService } from 'src/app/core/auth/user-route-access.service';
+import { Authority } from 'src/app/config/authority.constants';
 const routes: Routes = [
   {
     path: '',
@@ -21,10 +23,18 @@ const routes: Routes = [
     children: [
       {
         path: 'employeepage',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: EmployeePageContentComponent
       },
       {
         path: 'employeelist',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: EmployeeListComponent
       },
       {
@@ -33,10 +43,18 @@ const routes: Routes = [
       },
       {
         path: 'holidays',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: HolidaysComponent
       },
       {
         path: 'adminleaves',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: LeavesAdminComponent
       },
       {
@@ -45,10 +63,18 @@ const routes: Routes = [
       },
       {
         path: 'leavesettings',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: LeaveSettingsComponent
       },
       {
         path: 'attendanceadmin',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: AttendanceAdminComponent
       },
       {
@@ -57,18 +83,34 @@ const routes: Routes = [
       },
       {
         path: 'departments',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: DepartmentsComponent
       },
       {
         path: 'designation',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: DesignationComponent
       },
       {
         path: 'timesheet',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: TimesheetComponent
       },
       {
         path: 'overtime',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         component: OvertimeComponent
       },
 

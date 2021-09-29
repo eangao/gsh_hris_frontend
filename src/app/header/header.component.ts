@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Authority } from "../config/authority.constants";
+import { Account } from "../core/auth/account.model";
+import { AccountService } from "../core/auth/account.service";
 import { LoginService } from "../login/login.service";
 import { HeaderService } from "./header.service";
 
@@ -17,10 +20,14 @@ export class HeaderComponent implements OnInit {
   notifications: any;
   messagesData: any;
 
-  constructor( private loginService: LoginService, private headerService: HeaderService, private router: Router) {}
+
+
+  constructor( private loginService: LoginService,  private accountService: AccountService, private headerService: HeaderService, private router: Router) {}
 
   ngOnInit() {
-    // this.getDatas("notification");
+
+
+      // this.getDatas("notification");
     // this.getDatas("message");
 
     this.notifications = [
@@ -113,6 +120,10 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.loginService.logout();
     this.router.navigate(['/login']);
+  }
+
+  public get isAdmin(): boolean {
+    return this.accountService.hasAnyAuthority(Authority.ADMIN);
   }
 
 }

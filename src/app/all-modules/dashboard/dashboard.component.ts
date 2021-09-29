@@ -27,16 +27,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
      // if already authenticated then navigate to home page
-     this.accountService.identity().subscribe(() => {
-      if (this.accountService.isAuthenticated()) {
 
         if(this.accountService.hasAnyAuthority(Authority.ADMIN)){
           this.router.navigate(['/dashboard/admin']);
         }else{
           this.router.navigate(['/dashboard/employee']);
         }
-      }
-    });
+
   }
 
   onResize(event) {

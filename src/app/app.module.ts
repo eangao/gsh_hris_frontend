@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptor';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent
