@@ -1,8 +1,7 @@
-<!-- Page Content -->
-<div class="content container-fluid">
+<!-- <div class="content container-fluid"> -->
 
     <!-- Page Header -->
-    <div class="page-header">
+    <!-- <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
                 <h3 class="page-title">Employee</h3>
@@ -21,11 +20,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- /Page Header -->
 
     <!-- Search Filter -->
-    <div class="row filter-row">
+    <!-- <div class="row filter-row">
         <div class="col-sm-6 col-md-3">
             <div class="form-group form-focus">
                 <input type="text" class="form-control floating" (input)="searchId($event.target.value)" (focusout)="rerender()">
@@ -53,10 +52,10 @@
         <div class="col-sm-6 col-md-3">
             <a  class="btn btn-success btn-block"> Search </a>
         </div>
-    </div>
+    </div> -->
     <!-- /Search Filter -->
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
                 <table class="table table-striped custom-table datatable" datatable [dtOptions]="dtOptions"
@@ -67,7 +66,9 @@
                             <th>Employee ID</th>
                             <th>Email</th>
                             <th>Mobile</th>
-                            <th class="text-nowrap">Join Date</th>
+                            <th class="text-nowrap">Date Hired</th>
+                            <th>Department</th>
+                            <th>Employment Type</th>
                             <th>Role</th>
                             <th class="text-right no-sort">Action</th>
                         </tr>
@@ -85,6 +86,8 @@
                             <td>{{row.employeeId}}</td>
                             <td>{{row.email}}</td>
                             <td>{{row.mobile}}</td>
+                            <td>{{row.joindate | customDate}}</td>
+                            <td>{{row.joindate | customDate}}</td>
                             <td>{{row.joindate | customDate}}</td>
                             <td>
                                 <div class="dropdown">
@@ -120,11 +123,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- /Page Content -->
 
 <!-- Add Employee Modal -->
-<div id="add_employee" class="modal custom-modal fade" role="dialog">
+<!-- <div id="add_employee" class="modal custom-modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -513,11 +516,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- /Add Employee Modal -->
 
 <!-- Edit Employee Modal -->
-<div id="edit_employee" class="modal custom-modal fade" role="dialog">
+<!-- <div id="edit_employee" class="modal custom-modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -905,11 +908,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- /Edit Employee Modal -->
 
 <!-- Delete Employee Modal -->
-<div class="modal custom-modal fade" id="delete_employee" role="dialog">
+<!-- <div class="modal custom-modal fade" id="delete_employee" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -932,5 +935,158 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- /Delete Employee Modal -->
+
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//jhipster -->
+
+
+<div>
+  <h2 id="page-heading" data-cy="EmployeeHeading">
+    <span>Employees</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <!-- <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-employee"
+        [routerLink]="['/employee/new']"
+      >
+        <!-- <fa-icon icon="plus"></fa-icon> -->
+        <span> Create a new Employee </span>
+      </button>
+    </div>
+  </h2>
+
+  <!-- <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert> -->
+
+  <div class="alert alert-warning" id="no-result" *ngIf="employees?.length === 0">
+    <span>No employees found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="employees && employees.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+<!--          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>-->
+          <th scope="col" jhiSortBy="employeeId"><span>Employee Id</span> <fa-icon icon="sort"></fa-icon></th>
+<!--          <th scope="col" jhiSortBy="username"><span>Username</span> <fa-icon icon="sort"></fa-icon></th>-->
+          <th scope="col" jhiSortBy="firstName"><span>First Name</span> <fa-icon icon="sort"></fa-icon></th>
+<!--          <th scope="col" jhiSortBy="middleName"><span>Middle Name</span> <fa-icon icon="sort"></fa-icon></th>-->
+          <th scope="col" jhiSortBy="lastName"><span>Last Name</span> <fa-icon icon="sort"></fa-icon></th>
+<!--          <th scope="col" jhiSortBy="nameSuffix"><span>Name Suffix</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="birthdate"><span>Birthdate</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="sex"><span>Sex</span> <fa-icon icon="sort"></fa-icon></th>-->
+          <th scope="col" jhiSortBy="mobileNumber"><span>Mobile Number</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="email"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
+<!--          <th scope="col" jhiSortBy="isNotLocked"><span>Is Not Locked</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="dateHired"><span>Date Hired</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="dateDeno"><span>Date Deno</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="sickLeaveYearlyCredit"><span>Sick Leave Yearly Credit</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="sickLeaveYearlyCreditUsed">-->
+<!--            <span>Sick Leave Yearly Credit Used</span> <fa-icon icon="sort"></fa-icon>-->
+<!--          </th>-->
+<!--          <th scope="col" jhiSortBy="leaveYearlyCredit"><span>Leave Yearly Credit</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="leaveYearlyCreditUsed"><span>Leave Yearly Credit Used</span> <fa-icon icon="sort"></fa-icon></th>-->
+<!--          <th scope="col" jhiSortBy="user.id"><span>User</span> <fa-icon icon="sort"></fa-icon></th>-->
+          <th scope="col" jhiSortBy="department.name"><span>Department</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="employmentType.name"><span>Employment Type</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; trackBy: trackId" data-cy="entityTable">
+<!--          <td>-->
+<!--            <a [routerLink]="['/employee', employee.id, 'view']">{{ employee.id }}</a>-->
+<!--          </td>-->
+          <td>{{ employee.employeeId }}</td>
+<!--          <td>{{ employee.username }}</td>-->
+          <td>{{ employee.firstName }}</td>
+<!--          <td>{{ employee.middleName }}</td>-->
+          <td>{{ employee.lastName }}</td>
+<!--          <td>{{ employee.nameSuffix }}</td>-->
+<!--          <td>{{ employee.birthdate | formatMediumDate }}</td>-->
+<!--          <td>{{ employee.sex }}</td>-->
+          <td>{{ employee.mobileNumber }}</td>
+          <td>{{ employee.email }}</td>
+<!--          <td>{{ employee.isNotLocked }}</td>-->
+<!--          <td>{{ employee.dateHired | formatMediumDate }}</td>-->
+<!--          <td>{{ employee.dateDeno | formatMediumDate }}</td>-->
+<!--          <td>{{ employee.sickLeaveYearlyCredit }}</td>-->
+<!--          <td>{{ employee.sickLeaveYearlyCreditUsed }}</td>-->
+<!--          <td>{{ employee.leaveYearlyCredit }}</td>-->
+<!--          <td>{{ employee.leaveYearlyCreditUsed }}</td>-->
+<!--          <td>-->
+<!--            {{ employee.user?.id }}-->
+<!--          </td>-->
+          <td>
+            <div *ngIf="employee.department">
+              <a [routerLink]="['/department', employee.department?.id, 'view']">{{ employee.department?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="employee.employmentType">
+              <a [routerLink]="['/employment-type', employee.employmentType?.id, 'view']">{{ employee.employmentType?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/employee', employee.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/employee', employee.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(employee)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="employees && employees.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

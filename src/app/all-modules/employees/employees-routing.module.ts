@@ -33,6 +33,7 @@ const routes: Routes = [
         path: 'employeelist',
         data: {
           authorities: [Authority.ADMIN],
+          defaultSort: 'lastName,asc',
         },
         canActivate: [UserRouteAccessService],
         component: EmployeeListComponent

@@ -1,0 +1,23 @@
+import * as dayjs from 'dayjs';
+import { IEmployee } from './employee.model';
+
+
+export interface IDutySchedule {
+  id?: number;
+  dateTimeIn?: dayjs.Dayjs | null;
+  dateTimeOut?: dayjs.Dayjs | null;
+  employee?: IEmployee | null;
+}
+
+export class DutySchedule implements IDutySchedule {
+  constructor(
+    public id?: number,
+    public dateTimeIn?: dayjs.Dayjs | null,
+    public dateTimeOut?: dayjs.Dayjs | null,
+    public employee?: IEmployee | null
+  ) {}
+}
+
+export function getDutyScheduleIdentifier(dutySchedule: IDutySchedule): number | undefined {
+  return dutySchedule.id;
+}
