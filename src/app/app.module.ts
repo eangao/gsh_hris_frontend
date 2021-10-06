@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptor';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
+    SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,

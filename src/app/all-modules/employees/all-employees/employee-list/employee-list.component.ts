@@ -92,14 +92,9 @@ ngbPaginationPage = 1;
 
   protected handleNavigation(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
-
-      console.log("data - " + data);
-      console.log("params - " + params);
-
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
-      console.log("sort - " + sort)
       const predicate = sort[0];
       const ascending = sort[1] === ASC;
       if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
@@ -116,7 +111,7 @@ ngbPaginationPage = 1;
       result.push('lastName');
     }
 
-    console.log("sort - " + result)
+
     return result;
   }
 
@@ -148,15 +143,14 @@ ngbPaginationPage = 1;
     ///////////////////////////////////////////////////////////////////////////////
 
 
-    // // for floating label
-
-    // $(".floating")
-    //   .on("focus blur", function (e) {
-    //     $(this)
-    //       .parents(".form-focus")
-    //       .toggleClass("focused", e.type === "focus" || this.value.length > 0);
-    //   })
-    //   .trigger("blur");
+    // for floating label
+    $(".floating")
+      .on("focus blur", function (e) {
+        $(this)
+          .parents(".form-focus")
+          .toggleClass("focused", e.type === "focus" || this.value.length > 0);
+      })
+      .trigger("blur");
     // this.loadEmployee();
     // // add employee form validation
     // this.addEmployeeForm = this.formBuilder.group({

@@ -26,7 +26,6 @@ export class SidebarComponent implements OnInit {
   groups = {};
 
   constructor(
-    private accountService: AccountService,
     private router: Router,
     private allModulesService: AllModulesService
   ) {
@@ -80,7 +79,4 @@ export class SidebarComponent implements OnInit {
     this.allModulesService.members.active = member;
   }
 
-  public get isAdmin(): boolean {
-    return this.accountService.hasAnyAuthority(Authority.ADMIN);
-  }
 }

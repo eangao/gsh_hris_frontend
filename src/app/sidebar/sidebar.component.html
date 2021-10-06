@@ -16,7 +16,7 @@
                         <ul style="display: none;"
                             [ngStyle]="{ 'display' : urlComplete.mainUrl === 'dashboard' ? 'block' : 'none' }">
                             <li routerLink="/dashboard/admin"
-                                [hidden]="!isAdmin"><a
+                                *jhiHasAnyAuthority="'ROLE_ADMIN'"><a
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'admin' }" href="javascript:">Admin
                                     Dashboard</a></li>
                             <li routerLink="/dashboard/employee"><a
@@ -102,17 +102,17 @@
                        || urlComplete.mainUrl === 'employees' && urlComplete.subUrl === 'departments' || urlComplete.mainUrl === 'employees' && urlComplete.subUrl === 'designation'
                        || urlComplete.mainUrl === 'employees' && urlComplete.subUrl === 'timesheet' || urlComplete.mainUrl === 'employees' && urlComplete.subUrl === 'overtime'
                        || urlComplete.mainUrl === 'employees' && urlComplete.subUrl === 'employeelist'  || urlComplete.mainUrl === 'scheduling'  || urlComplete.mainUrl === 'shift' ? 'block' : 'none' }">
-                            <li [hidden]="!isAdmin"
+                            <li *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                 routerLink="/employees/employeepage">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'employeepage' || urlComplete.subUrl === 'employeelist'}">All Employees</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                 routerLink="/employees/holidays">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'holidays'}">Holidays</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/employees/adminleaves">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'adminleaves'}">Leaves (Admin) <span
@@ -123,12 +123,12 @@
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'employeeleaves'}">Leaves
                                     (Employee)</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/employees/leavesettings">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'leavesettings'}">Leave Settings</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/employees/attendanceadmin">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'attendanceadmin'}">Attendance
@@ -139,27 +139,27 @@
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'attendanceemployee'}">Attendance
                                     (Employee)</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/employees/departments">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'departments'}">Departments</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/employees/designation">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'designation'}">Designations</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/employees/timesheet">
                                 <a href="javascript:"
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'timesheet'}">Timesheet</a>
                             </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/scheduling/shift-scheduling">
                                 <a href="javascript:" [ngClass]="{ 'active' : urlComplete.subUrl === 'shift-scheduling' || urlComplete.subUrl === 'shift-list'}">Shift & Schedule</a>
 
                              </li>
-                            <li  [hidden]="!isAdmin"
+                            <li  *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                  routerLink="/employees/overtime">
                                 <a href="javascript:" [ngClass]="{ 'active' : urlComplete.subUrl === 'overtime'}">Overtime</a>
                             </li>
